@@ -1,0 +1,16 @@
+﻿@model AboutViewModel
+
+@{
+    
+}
+
+<h1>@Model.Title</h1>
+
+<div class="alert alert-danger">@Model.Description</div>
+
+@{
+    foreach(var tag in Model.Tags)
+    {
+        <p>@tag</p>
+    }
+}
