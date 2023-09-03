@@ -1,0 +1,30 @@
+﻿using CarWorkshop.Domain.Interfaces;
+using MediatR;
+
+namespace CarWorkshop.Application.Commands.EditCarWorkshop
+{
+    public class EditCarWorkshopCommandHandler : IRequestHandler<EditCarWorkshopCommand>
+    {
+        private readonly ICarWorkshopRepository _repository;
+
+        public EditCarWorkshopCommandHandler(ICarWorkshopRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public async Task Handle(EditCarWorkshopCommand request, CancellationToken cancellationToken)
+        {
+            var carWorkshop = await _repository.GetByEncodedName(request.EncodedName!);
+
+            carWorkshop.Description = request.Description;
+            carWorkshop.About = request.About;
+
+            carWorkshop.ContactDetails.City = request.City;
+            carWorkshop.ContactDetails.PhoneNumber = request.PhoneNumber;
+            carWorkshop.ContactDetails.PostalCode = request.PostalCode;
+            carWorkshop.ContactDetails.Street = request.Street;
+
+            await _repository.Commit();
+        }
+    }
+}
