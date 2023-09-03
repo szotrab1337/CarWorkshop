@@ -1,11 +1,12 @@
-﻿using CarWorkshop.Domain.Interfaces;
+﻿using CarWorkshop.Application.CarWorkshop;
+using CarWorkshop.Domain.Interfaces;
 using FluentValidation;
 
-namespace CarWorkshop.Application.CarWorkshop
+namespace CarWorkshop.Application.Commands.CreateCarWorkshop
 {
-    public class CarWorkshopDtoValidator : AbstractValidator<CarWorkshopDto>
+    public class CreateCarWorkshopCommandValidator : AbstractValidator<CreateCarWorkshopCommand>
     {
-        public CarWorkshopDtoValidator(ICarWorkshopRepository repository)
+        public CreateCarWorkshopCommandValidator(ICarWorkshopRepository repository)
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
@@ -15,7 +16,7 @@ namespace CarWorkshop.Application.CarWorkshop
                 {
                     var existingCarWorkshop = repository.GetByName(value).Result;
 
-                    if(existingCarWorkshop != null)
+                    if (existingCarWorkshop != null)
                     {
                         context.AddFailure($"{value} is not unique name for car workshop");
                     }
