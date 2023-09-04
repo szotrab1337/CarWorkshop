@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Identity\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
 		<PrivateAssets>all</PrivateAssets>
