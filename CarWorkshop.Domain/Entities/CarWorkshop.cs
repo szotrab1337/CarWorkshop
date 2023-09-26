@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace CarWorkshop.Domain.Entities
 {
@@ -10,6 +10,9 @@ namespace CarWorkshop.Domain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public CarWorkshopContactDetails ContactDetails { get; set; } = default!;
         public string? About { get; set; }
+
+        public string? CreatedById { get; set; }
+        public IdentityUser? CreatedBy { get; set; }
 
         public string EncodedName { get; private set; } = default!;
 
