@@ -1,7 +1,7 @@
 ﻿using CarWorkshop.Application.CarWorkshop;
 using MediatR;
 
-namespace CarWorkshop.Application.Commands.CreateCarWorkshop
+namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
 {
     public class CreateCarWorkshopCommand : CarWorkshopDto, IRequest
     {

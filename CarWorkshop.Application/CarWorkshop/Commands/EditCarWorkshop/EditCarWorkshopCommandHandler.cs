@@ -2,7 +2,7 @@
 using CarWorkshop.Domain.Interfaces;
 using MediatR;
 
-namespace CarWorkshop.Application.Commands.EditCarWorkshop
+namespace CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop
 {
     public class EditCarWorkshopCommandHandler : IRequestHandler<EditCarWorkshopCommand>
     {

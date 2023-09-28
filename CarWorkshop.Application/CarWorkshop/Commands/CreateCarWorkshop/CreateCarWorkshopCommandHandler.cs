@@ -3,7 +3,7 @@ using CarWorkshop.Application.ApplicationUser;
 using CarWorkshop.Domain.Interfaces;
 using MediatR;
 
-namespace CarWorkshop.Application.Commands.CreateCarWorkshop
+namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
 {
     public class CreateCarWorkshopCommandHandler : IRequestHandler<CreateCarWorkshopCommand>
     {
@@ -22,7 +22,7 @@ namespace CarWorkshop.Application.Commands.CreateCarWorkshop
         {
             var currentUser = _userContext.GetCurrentUser();
 
-            if(currentUser == null || !currentUser.IsInRole("Owner"))
+            if (currentUser == null || !currentUser.IsInRole("Owner"))
             {
                 throw new InvalidOperationException();
             }

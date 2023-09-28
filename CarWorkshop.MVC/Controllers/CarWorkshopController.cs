@@ -1,12 +1,17 @@
 ﻿using AutoMapper;
 using CarWorkshop.Application.CarWorkshop;
+using CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop;
+using CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Queries.GetAllCarWorkshops;
 using CarWorkshop.Application.CarWorkshop.Queries.GetCarWorkshopByEncodedName;
-using CarWorkshop.Application.Commands.CreateCarWorkshop;
-using CarWorkshop.Application.Commands.EditCarWorkshop;
+using CarWorkshop.Application.CarWorkshopService.Commands;
+using CarWorkshop.Application.CarWorkshopService.Queries.GetCarWorkshopServices;
+using CarWorkshop.MVC.Extensions;
+using CarWorkshop.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CarWorkshop.MVC.Controllers
 {
@@ -81,9 +86,33 @@ namespace CarWorkshop.MVC.Controllers
                 return View(command);
             }
 
-            
             await _mediator.Send(command);
+
+            this.SetNotification("success", $"Created carworkshop: {command.Name}");
+
             return RedirectToAction(nameof(Index));
+        }
+        
+        [HttpPost]
+        [Route("CarWorkshop/CarWorkshopService")]
+        public async Task<IActionResult> CreateCarworkshopService(CreateCarWorkshopServiceCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("CarWorkshop/{encodedName}/CarWorkshopService")]
+        public async Task<IActionResult> GetCarWorkshopServices(string encodedName)
+        {
+            var data = await _mediator.Send(new GetCarWorkshopServicesQuery() { EncodedName = encodedName });
+            return Ok(data);
         }
     }
 }

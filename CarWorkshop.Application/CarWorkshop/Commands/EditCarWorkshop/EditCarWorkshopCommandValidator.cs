@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CarWorkshop.Application.Commands.EditCarWorkshop
+namespace CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop
 {
     public class EditCarWorkshopCommandValidator : AbstractValidator<EditCarWorkshopCommand>
     {

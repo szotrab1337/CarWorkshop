@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CarWorkshop.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarWorkshop.Infrastructure.Persistence
@@ -10,6 +11,7 @@ namespace CarWorkshop.Infrastructure.Persistence
         }
 
         public DbSet<Domain.Entities.CarWorkshop> CarWorkshops { get; set; }
+        public DbSet<CarWorkshopService> Services { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -17,6 +19,11 @@ namespace CarWorkshop.Infrastructure.Persistence
 
             builder.Entity<Domain.Entities.CarWorkshop>()
                 .OwnsOne(x => x.ContactDetails);
+
+            builder.Entity<Domain.Entities.CarWorkshop>()
+                .HasMany(x => x.Services)
+                .WithOne(y => y.CarWorkshop)
+                .HasForeignKey(c => c.CarWorkshopId);
         }
     }
 }
